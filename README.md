@@ -10,7 +10,7 @@ echo $SPOT_FLEET_REQUEST_ID
 export INSTANCE_IP=$(aws ec2 describe-instances | jq -r '.Reservations[0].Instances[0].PublicIpAddress')
 
 # Run Docker merlin-tensorflow-training
-ssh -i key_pair_name.pem ubuntu@$INSTANCE_IP "docker run -name merlin-tensorflow -d -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY --runtime=nvidia --rm -it -p 8888:8888 -p 8797:8787 -p 8796:8786 --ipc=host nvcr.io/nvidia/merlin/merlin-tensorflow-training:0.5.3"
+ssh -i key_pair_name.pem ubuntu@$INSTANCE_IP "docker run --name merlin-tensorflow -d -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY --runtime=nvidia --rm -it -p 8888:8888 -p 8797:8787 -p 8796:8786 --ipc=host nvcr.io/nvidia/merlin/merlin-tensorflow-training:0.5.3"
 
 # Run jupyter-lab
 ssh -i key_pair_name.pem ubuntu@$INSTANCE_IP "docker exec -ti merlin-tensorflow cd /nvtabular ; jupyter-lab --allow-root --ip='0.0.0.0'"
