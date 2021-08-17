@@ -1,0 +1,30 @@
+{
+   "AllocationStrategy": "capacityOptimized",
+   "OnDemandAllocationStrategy": "prioritized",
+   "SpotMaintenanceStrategies": {
+      "CapacityRebalance": {
+         "ReplacementStrategy": "launch"
+      }
+   },
+   "LaunchTemplateConfigs": [
+      {
+         "LaunchTemplateSpecification": {
+            "LaunchTemplateId": "lt-04bd5ae77aebxxxxxx",
+            "Version": "4"
+         },
+         "Overrides":[
+            {
+               "InstanceType":"g4dn.xlarge",
+               "WeightedCapacity": 1.0,
+               "Priority": 6.0
+            }
+         ]
+      }
+   ],
+   "IamFleetRole": "arn:aws:iam::1234567890:role/aws-service-role/spotfleet.amazonaws.com/AWSServiceRoleForEC2SpotFleet",
+   "TargetCapacity": 1,
+   "OnDemandTargetCapacity": 0,
+   "TerminateInstancesWithExpiration": true,
+   "Type": "maintain",
+   "ReplaceUnhealthyInstances": true
+}
